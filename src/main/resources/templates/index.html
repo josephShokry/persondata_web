@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Home page</title>
+</head>
+<body>
+    <h1> Welcome to the home page </h1>
+    <a href="http://localhost:8080/addpersons">add persons</a>
+    <a href="http://localhost:8080/viewall">view all data</a>
+    <table>
+        <tr th:each="person : ${all}">
+            <td th:text="${person.firstName}"></td>
+            <td><a th:href="@{http://localhost:8080/getdata/{name}(name=${person.firstName})}"> view data</a></td>
+            <!--<td><a th:href="@{http://localhost:8080/delet/{name}(name=${person.firstName})}"> delet person</a></td>-->
+            <td><a href="http://localhost:8080/viewall" th:methods="delete"> edit data</a></td>
+            <td><form th:object="${person}" th:action="@{http://localhost:8080/delet/{name}(name=${person.firstName})}" th:method="delete" >
+                <button type="submit" id="submitButton">delete </button>
+            </form></td>
+
+        </tr>
+    </table>
+</body>
+</html>
